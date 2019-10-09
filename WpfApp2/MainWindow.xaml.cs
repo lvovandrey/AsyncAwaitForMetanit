@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -45,18 +46,24 @@ namespace WpfApp2
             Logging("После выполнения таски в WriteAsync() - " + Thread.CurrentThread.ManagedThreadId.ToString() + "\n");
 
             //собственно благодаря тому что мы находимся в первичном потоке мы далее можем не заморачиваться с Dispatcher.Invoke
-            txt.Text = Rnd.ToString();
+           Logging(Rnd.ToString());
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
             Logging("Зашли в Button_Click - " + Thread.CurrentThread.ManagedThreadId.ToString() + "\n");
-            WriteAsync();
+            await Task.Run(() =>
+            {
+                WriteAsync();
+            });
             Logging("Завершили Button_Click - " + Thread.CurrentThread.ManagedThreadId.ToString() + "\n");
         }
 
+
+
         void Logging(string text)
         {
+            Debug.Write(text);
             Dispatcher.Invoke(() => { Log.Text += text; });
         }
     }

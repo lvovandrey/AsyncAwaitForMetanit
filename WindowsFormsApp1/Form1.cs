@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -49,6 +50,7 @@ namespace WindowsFormsApp1
 
         void Logging(string text)
         {
+            Debug.Write(text);
             Log.Invoke((MethodInvoker)(() => Log.Text += text+ Environment.NewLine)); 
         }
 
