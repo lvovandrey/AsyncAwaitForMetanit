@@ -35,6 +35,8 @@ namespace WindowsFormsApp1
 
             //Здесь "оставшаяся часть" метода выполняется в первичном потоке.
             Logging("После выполнения таски в WriteAsync() - " + Thread.CurrentThread.ManagedThreadId.ToString() + "\n");
+
+            //Здесь мы находимся в первичном потоке и не заморачиваемся с Invoke. 
             txt.Text = Rnd.ToString();
         }
 

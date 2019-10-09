@@ -43,6 +43,8 @@ namespace WpfApp2
 
             //Здесь "оставшаяся часть" метода выполняется в первичном потоке.
             Logging("После выполнения таски в WriteAsync() - " + Thread.CurrentThread.ManagedThreadId.ToString() + "\n");
+
+            //собственно благодаря тому что мы находимся в первичном потоке мы далее можем не заморачиваться с Dispatcher.Invoke
             txt.Text = Rnd.ToString();
         }
 
